@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tatas bagle</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/swiper-bundle.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="./image/favicons.png">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script src="js/swiper-bundle.min.js"></script>
+    <script>
+        let timerEnded = false;  // 종료 알림이 떴는지 여부를 저장하는 변수
+
+        function updateTimer(fdate, timerid) {
+            const future = Date.parse(fdate);
+            const now = new Date();
+            const diff = future - now;
+
+            if (diff < 0) {
+                document.getElementById(timerid).innerHTML =
+                    '00 <span>&bull;</span> 00 <span>&bull;</span> 00 <span>&bull;</span> 00';
+
+                // 종료 알림이 아직 안 떴으면 알림 띄우고, flag 설정
+                if (!timerEnded) {
+                    alert("할인 타이머가 종료되었습니다!");
+                    timerEnded = true;
+                }
+                return;
+            }
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+            const mins = Math.floor(diff / (1000 * 60));
+            const secs = Math.floor(diff / 1000);
+
+            let d = days;
+            let h = hours - days * 24;
+            let m = mins - hours * 60;
+            let s = secs - mins * 60;
+
+            if (d < 10) d = `0${d}`
+            if (h < 10) h = `0${h}`
+            if (m < 10) m = `0${m}`
+            if (s < 10) s = `0${s}`
+            document.getElementById(timerid).innerHTML = `${d} <span>&bull;</span> ${h} <span>&bull;</span> ${m} <span>&bull;</span> ${s}`;
+
+            // document.getElementById(timerid).innerHTML =`<div><span>${d}일</span><span> ${h} : ${m} : ${s}</span></div>`;
+        }
+
+        setInterval(() => { updateTimer('2025/07/14 19:15:00', 'timer1') }, 1000);
+
+        window.onload = function () {
+            let topban = document.querySelector('.topban')
+            topban.querySelector('div img').addEventListener('click', function () {
+                topban.style.height = 0;
+            });
+
+            const visual = new Swiper('.visual', {
+                // Optional parameters
+
+                loop: true,
+                autoplay: {
+                    delay: 2500,
+                    disableOnInteraction: false
+                },
+
+                // If we need pagination
+                pagination: {
+                    el: '.swiper-pagination',
+                },
+
+                // Navigation arrows
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+
+
+            });
+
+            const mlist = new Swiper('.wrap_m', {
+                autoplay: {
+                    delay: 0,
+                    stopOnLastSlide: false,
+                    disableOnInteraction: true,
+                },
+                loop: true,
+                speed: 3000,
+                slidesPerView: 'auto',
+                loopedSlides: 5,
+                observer: true,
+                observereParents: true,
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <div class="topban">
+        <p><a href="#"><span class="blind">맛있는 후기 작성하고 아메리카노 받자</span></a></p>
+        <div class="center">
+            <div><img src="image/topclose.png" alt></div>
+        </div>
+    </div>
+    <header>
+        <div class="center">
+            <h1><a href="index.html"><img src="image/logo.png" alt="Tatas"></a></h1>
+            <nav><a href="#">메뉴소개</a><a href="#">브랜드</a><a href="#">타타스뉴스</a><a href="#">창업문의</a></nav>
+        </div>
+    </header>
+    <div class="visual swiper">
+        <ul class="swiper-wrapper">
+            <li class="vi1 swiper-slide"><a href="#"><span class="blind">육쪽 마늘</span></a></li>
+            <li class="vi2 swiper-slide"><a href="#"><span class="blind">마이 베이글</span></a></li>
+            <li class="vi3 swiper-slide"><a href="#"><span class="blind">세가지맛</span></a></li>
+        </ul>
+        <!-- If we need pagination -->
+        <div class="swiper-pagination"></div>
+
+        <!-- If we need navigation buttons -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+    </div>
+    <section class="center menu">
+        <h2>TATA's MENU</h2>
+        <p>Happiness, Fun, Refreshment, Energy and Break... If need be, just enjoy them! In busy daily lives,<br>Tata's
+            will be a sweet friend to you.</p>
+        <p>타타스의 다양한 베이글과 음료들</p>
+        <div class="meli">
+            <ul>
+                <li>
+                    <img src="image/bagle1.png" alt="베이글">
+                    <h3>Bagle</h3>
+                    <p>타타스의 상징 베이글</p>
+                    <p><a href="#">더보기<img src="image/more.png" alt="더보기"></a></p>
+                </li>
+                <li>
+                    <img src="image/sandwich1.png" alt="샌드위치">
+                    <h3>Sandwich</h3>
+                    <p>타타스의 야심작 샌드위치</p>
+                    <p><a href="">더보기<img src="image/more.png" alt="더보기"></a></p>
+                </li>
+                <li>
+                    <img src="image/creamcheese.png" alt="크림치즈">
+                    <h3>Creamcheese</h3>
+                    <p>베이글에 어울리는 크림치즈 듬뿍</p>
+                    <p><a href="#">더보기<a href=""><img src="image/more.png" alt="더보기"></a></p>
+                </li>
+                <li>
+                    <img src="image/coffee1.png" alt="커피">
+                    <h3>Coffee</h3>
+                    <p>모자란 2%를 채워줄 정성가득 커피</p>
+                    <p><a href="#">더보기<a href=""><img src="image/more.png" alt="더보기"></a></p>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <section class="center best">
+        <h2>OUR BEST MENU</h2>
+        <p>타타스의 베스트 베이글 메뉴</p>
+        <ul>
+            <li>
+                <div>
+                    <img src="image/best_1.png" alt="소보루">
+                    <a href="#"><img class="aa" src="image/heart.png" alt="좋아요"></a>
+                    <a href="#"><img class="bb" src="image/shop.png" alt="장바구니"></a>
+                </div>
+                <p>소보루 베이글
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3,000원
+                </p>
+                <p>달콤, 고소, 쫄깃<br> 3가지의 매력을 동시에!</p>
+            </li>
+            <li>
+                <div>
+                    <img src="image/best2.png" alt="바질롤">
+                    <a href="#"><img class="aa" src="image/heart.png" alt="좋아요"></a>
+                    <a href="#"><img class="bb" src="image/shop.png" alt="장바구니"></a>
+                </div>
+                <p>바질 롤 치즈 베이글 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3,500원</p>
+                <p>바질의 향긋하고<br> 치즈의 짭잘한 겉바속촉의 조화</p>
+            </li>
+            <li>
+                <div>
+                    <img src="image/best3.png" alt="글레이즈드">
+                    <a href="#"><img class="aa" src="image/heart.png" alt="좋아요"></a>
+                    <a href="#"><img class="bb" src="image/shop.png" alt="장바구니"></a>
+                </div>
+                <p>글레이즈드 베이글 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3,200원</p>
+                <p>시그니처 수제 커스터드<br> 크림 & 달콤한 글레이즈드</p>
+            </li>
+            <li>
+                <div>
+                    <img src="image/best4.png" alt="소금">
+                    <a href="#"><img class="aa" src="image/heart.png" alt="좋아요"></a>
+                    <a href="#"><img class="bb" src="image/shop.png" alt="장바구니"></a>
+                </div>
+                <p>소금 베이글
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3,000원
+                </p>
+                <p>담백하고 부드러운<br> 소금 베이글의 새로운 발견!</p>
+            </li>
+        </ul>
+    </section>
+    <div class="longba">
+        <p><a href="#"><span class="blind">타타가 문구키트</span></a></p>
+    </div>
+    <div class="middleba center">
+        <p><a href="#"><span class="blind">Fresh & Rich</span></a></p>
+        <p><a href="#"><span class="blind">리뷰</span></a></p>
+    </div>
+    <section class="time">
+        <div class="center tt">
+            <div>
+                <h2>조식 메뉴 세일</h2>
+                <p>베이글 + 크림치즈 + 스프 + 아메리카노</p>
+                <p><del>10,000</del><img src="image/timear.png" alt>8,500</p>
+                <div id="timer1" class="timer"></div>
+                <p><span>DAYS</span><span>HORS</span><span>MINS</span><span>SECS</span></p>
+                <!-- <div id="timer2" class="timer"></div> -->
+            </div>
+            <p class="bf"><img src="image/time.jpg" alt="조식메뉴"></p>
+        </div>
+    </section>
+    <section class="notice center">
+        <h2>TATA's NOTICE</h2>
+        <p>타타스의 새로운 소식을 한눈에</p>
+        <div class="notiba center">
+            <p class="cc">
+                <img src="image/notice1.jpg" alt="타타스 베이글 즐기는 방법">
+            </p>
+            <p><a href="#"><span class="blind">타타스 베이글의 소식을<br>빠르게 전달해 드립니다.</span></a></p>
+            <div class="news">
+                <ul>
+                    <li>&ndash; 타타스와 함께하는 tvN '이번 생도 잘 부탁해'</li>
+                    <li>&ndash; 타타스와 콜라보레이션 '메이플 스토리 x 타타스베이글'</li>
+                    <li>&ndash; 타타스 고객센터 2023년 추석 연휴 휴무 안내</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <div class="longba2">
+        <p><a href="#"><span class="blind">타타스 베이글</span></a></p>
+    </div>
+    <div class="fixed">
+        <p class="center"></p>
+    </div>
+    <section class="store">
+        <h2>TATA's STORE</h2>
+        <p>타타스매장 리스트</p>
+        <div class="wrap_m swiper">
+            <ul class="swiper-wrapper">
+                <li class="swiper-slide">
+                    <img src="image/loof1.jpg" alt>
+                    <p>익산 영동점</p>
+                </li>
+                <li class="swiper-slide">
+                    <img src="image/loof2.jpg" alt>
+                    <p>아산 용화점 </p>
+                </li>
+                <li class="swiper-slide"><img src="image/loof3.jpg" alt>
+                    <p>부산대점</p>
+                </li>
+                <li class="swiper-slide"><img src="image/loof4.jpg" alt>
+                    <p>수원대점</p>
+                </li>
+                <li class="swiper-slide"><img src="image/loof5.jpg" alt>
+                    <p>일산 동구점</p>
+                </li>
+                <li class="swiper-slide"><img src="image/loof6.jpg" alt>
+                    <p>일산 서구점</p>
+                </li>
+                <li class="swiper-slide"><img src="image/loof7.jpg" alt>
+                    <p>구로점</p>
+                </li>
+                <li class="swiper-slide"><img src="image/loof8.jpg" alt>
+                    <p>가산점</p>
+                </li>
+                <li class="swiper-slide"><img src="image/loof9.jpg" alt>
+                    <p>평택점</p>
+                </li>
+                <li class="swiper-slide"><img src="image/loof10.jpg" alt>
+                    <p>홍제점</p>
+                </li>
+                <li class="swiper-slide"><img src="image/loof11.jpg" alt>
+                    <p>신촌점</p>
+                </li>
+                <li class="swiper-slide"><img src="image/loof12.jpg" alt>
+                    <p>일산 대화점</p>
+                </li>
+                <li class="swiper-slide"><img src="image/loof13.jpg" alt>
+                    <p>서강대점</p>
+                </li>
+            </ul>
+    </section>
+    <footer>
+        <div class="ft center">
+            <p><img src="image/logo.png" alt=""></p>
+            <ul>
+                <li><a href="">메뉴소개</a></li>
+                <li><a href="">브랜드</a></li>
+                <li><a href="">타타스뉴스</a></li>
+                <li><a href="">창업문의</a></li>
+            </ul>
+        </div>
+        <address>
+            <p>
+                <span>대표. 조금봉 </span>
+                <span>사업자등록번호. 758-86-02659</span>
+                <span>Tel. 1577-1379</span>
+                <span>Fax. 041-900-5506</span>
+            </p>
+            <p>
+                <span>E-mail. tatas@tatas.co.kr </span>
+                <span>Addr. 충남 천안시 서북구 불당4로 106, 1F 102호 주식회사 티에이</span>
+            </p>
+        </address>
+        <small class="center">이 사이트는 포트폴리오용으로 만들어진 가상 사이트입니다. <br>사이트에 사용된 사진과 내용의 저작권은 타타스 베이글에 있습니다. COPYRIGHT &copy;
+            류정현. ALL RIGHTS RESERVED.
+        </small>
+    </footer>
+</body>
+
+</html>
